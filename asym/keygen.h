@@ -7,4 +7,6 @@
 #define VERSION 1.5f
 
 void PrintHelp(void);
-void DoArgs(char **argv);
+int DoArgs(char **argv);
+int CreatePubkey(char *private_file);
+int CreateKeypair(char *basename);

@@ -8,13 +8,25 @@ void PrintHelp(void)
     printf("%s\n", "DO NOT USE THIS IMPLEMENTATION FOR ANYTHING SERIOUS EVER");
     printf("Version %.1f\n", VERSION);
     printf("%s\n", "Has a single mandatory flag, that accepts single filename as argument");
-    printf("%s\n", "\t* Use -r/--private-key <key_file> to produce the public key for the supplied private key");
+    printf("%s\n", "\t* Use -p/--private-key <key_file> to produce the public key for the supplied private key");
     printf("%s\n", "\t* Use -c/--create <basename> to create keypair with specified basename. Default: id_rsa");
     printf("%s\n", "Optional flags: -h for this text, and -v for the current version.");
     printf("%s\n", "DO NOT USE THIS IMPLEMENTATION FOR ANYTHING SERIOUS EVER");
 }
 
-void DoArgs(char **argv)
+int CreatePubkey(char *private_file)
+{
+    (void)private_file;
+    return 1;//NOT IMPLEMENTED
+}
+
+int CreateKeypair(char *basename)
+{
+    (void)basename;
+    return 1;//NOT IMPLEMENTED
+}
+
+int DoArgs(char **argv)
 {
     //_Very_ basic commandline processing
     switch(argv[1][0]){
@@ -25,17 +37,25 @@ void DoArgs(char **argv)
             if( argv[1][1] == 'h' )
             {
                 PrintHelp();
-                exit(0);
+                return 0;
             }
             else if( argv[1][1] == 'v' )
             {
                 printf("%s, version %.2f\n", argv[0], VERSION);
-                exit(0);
+                return 0;
+            }
+            else if( argv[1][1] == 'p' )
+            {
+                return CreatePubkey(argv[2]);
+            }
+            else if( argv[1][1] == 'c' )
+            {
+                return CreateKeypair(argv[2]);
             }
             else
             {
                 printf(USAGE_FMT,PROGNAME);
-                exit(1);
+                return 1;
             }
             break;
         // Otherwise, we assume it's the filename, and attempt to open
@@ -44,6 +64,7 @@ void DoArgs(char **argv)
             PrintHelp();
             break;
     }
+    return 0;
 }
 
 int main(int argc, char **argv)
@@ -59,7 +80,5 @@ int main(int argc, char **argv)
         exit(1);
     }
 
-    DoArgs(argv);
-
-    return 0;
+    return DoArgs(argv);
 }
