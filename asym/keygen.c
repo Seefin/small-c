@@ -14,6 +14,24 @@ void PrintHelp(void)
     printf("%s\n", "DO NOT USE THIS IMPLEMENTATION FOR ANYTHING SERIOUS EVER");
 }
 
+uint32_t *GenPrime(void)
+{
+    /* So, I finally have to tackle bit-sequence representation in C.
+     * Which is the absolute least of my problems in this function, but we'll get to that. Based on a
+     * StackOverflow answer (https://stackoverflow.com/a/30590727), we represent an array of
+     * bits as an array of 32-bit ints, and treat each bit in the int as a position in the array.
+     * We use the SetBit, ClearBit, and TestBit macros to deal with each bit in the array.
+     */
+    FILE *RandFile = fopen("/dev/random","rb");
+    uint32_t *rand = calloc(BITS/32, 32);
+    for( int i = 0; i < (BITS/32); i ++){
+        int ret = fread(&(rand[i]), 4, 1, RandFile);
+        printf("Read %d bits from /dev/random\n",ret * 32); 
+    }
+    return NULL;
+}
+
+
 int CreatePubkey(char *private_file)
 {
     (void)private_file;
@@ -23,6 +41,8 @@ int CreatePubkey(char *private_file)
 int CreateKeypair(char *basename)
 {
     (void)basename;
+    uint32_t *prime = GenPrime();
+    (void) prime;
     return 1;//NOT IMPLEMENTED
 }
 
