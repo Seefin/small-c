@@ -99,6 +99,13 @@ int main(int argc, char **argv)
         fprintf(stderr,USAGE_FMT, PROGNAME);
         exit(1);
     }
+    UInt x = u_int_create(0, 4 , 0x446F6E27742067,\
+            0x6F20757020746865, 0x72652E2E2E204974,0x277320646172B2E);
+    
+    printf("hex: %s\n",x.hex);
 
-    return DoArgs(argv);
+    u_int_free(&x);
+
+    return 0;
+    //return DoArgs(argv);
 }

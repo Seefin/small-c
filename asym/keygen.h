@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>
-#include "lib/bn.h"
+#include "lib/BigInt.h"
 
 #define PER_LINE 16
 #define USAGE_FMT "Usage: %s -h -v <filename>\n"
