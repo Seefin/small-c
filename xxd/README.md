@@ -3,7 +3,7 @@ This is a _very_ simple xxd clone.
 
 # Invocation
 ```shell
-xxd <some_file>
+xxd <some_file> | - (for stdin)
 ```
 
 # Options
